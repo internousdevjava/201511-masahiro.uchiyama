@@ -20,6 +20,13 @@ public class KisoKadai2 {
 				System.out.println("入力値:" + str);
 				int num = Integer.parseInt(str);
 
+				if (num <1 || num > 100) {
+					
+					System.out.println("値が正しくありません。やり直してください。");
+					
+				} else 	
+				
+				
 				if (ans == num) {
 					System.out.println("当たり！！");
 					break;
@@ -30,6 +37,7 @@ public class KisoKadai2 {
 					System.out.println("小さいです");
 					continue;
 				}
+			
 			} catch (Exception e) {
 				e.printStackTrace();
 				System.out.println("エラーです。やり直してください。");
