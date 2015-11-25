@@ -290,6 +290,13 @@ public class KisoKadai3 {
 
 					if (file.exists()) {
 						System.out.println("                       ");
+						
+						if (!file.isFile()) {
+							System.out.println("ファイルを選択してください");
+							continue;
+						}else{
+							}
+						
 
 					} else {
 						System.out.println("ファイルは存在しません");
