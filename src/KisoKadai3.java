@@ -8,188 +8,178 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.PrintWriter;
 
-public class KisoKadai3{
-   public static void main (String[] args){
+public class KisoKadai3 {
 
+	public static void main(String args[]) throws IOException {
+		System.out.println("--処理開始--");
 
-     //処理開始
-     System.out.println("処理を開始します");
-     System.out.println("cドライブの中の一覧を表示します");
-     System.out.println("                            ");
-
-
-     //ディレクトリ・ファイルのリストを表示
-
-		 File cdirectory = new File("c:\\");
-
-		 File filelist[] = cdirectory.listFiles();
-		 for (int i = 0; i < filelist.length ; i++){
-
-			 if(filelist[i].isFile()){
-			 System.out.println("[F]" + filelist[i].getName());
-
-		  }else if(filelist[i].isDirectory()){
-         System.out.println("[D]" + filelist[i].getName());
-
-		   }else{
-				 System.out.println("[?]" + filelist[i].getName());
-
-		   }
-		}
-
-  //ディレクトリの指定
-
-  System.out.println("指定するディレクトリ名を入力してください");
-  System.out.println("例　　c:\\～～～");
-  String directory_name = null;
-  try{
-   InputStreamReader isr=new InputStreamReader(System.in);
-   BufferedReader  br=new  BufferedReader(isr);
-   directory_name=br.readLine();
-  }catch(Exception e){
-   e.printStackTrace();
-  }
- String path_dir = directory_name;
- File dir = new File(path_dir);
-
- //フルパスで取得
-          System.out.println("--ファイル一覧(フルパス)--");
-          File[] files1 = dir.listFiles();
-          for (int i = 0; i < files1.length; i++) {
-             File file = files1[i];
-             if (files1[i].isFile()){
-                 //ファイル名表示
-                  System.out.println(file);
-             }else if (files1[i].isDirectory()){
-                 //ディレクトリ名表示(※１)
-                 System.out.println(file);
-              }
-          }
-
-
-
-
-  //ファイルの絶対パスを取得
-
-		System.out.println("指定するファイル名を絶対パス名で入力してください");
-		System.out.println("例　　c:\\～～～\\～～～");
-		String file_name = null;
-		try{
-		 InputStreamReader isr=new InputStreamReader(System.in);
-		 BufferedReader  br=new  BufferedReader(isr);
-		 file_name=br.readLine();
-		}catch(Exception e){
-		 e.printStackTrace();
-		}
-	File file = new File(file_name);  //fileオブジェクトの作成
-	String path = file.getAbsolutePath();
-
-	System.out.println("File :" +path);
-
-  //絶対パスで指定されたファイルの確認
- try{
-
-        if(file.exists()){
-        System.out.println("ファイルは既に存在します");
-
-        }else{
-        System.out.println("ファイルは存在しません");
-
-
-        //ディレクトリの新規作成
-    try{
-        System.out.println("ディレクトリを新規作成します");
-        System.out.println("新しく作るディレクトリ名を入力してください");
-        System.out.println("例  c:\\～～～");
-
-        String new_directory_name = null;
-
-
-    		 InputStreamReader isr=new InputStreamReader(System.in);
-    		 BufferedReader  br=new  BufferedReader(isr);
-    		 new_directory_name=br.readLine();
-
-        File new_directory = new File(new_directory_name);
-
-
-
-
-          if (new_directory.mkdirs()) {
-             System.out.println("ディレクトリの作成に成功しました");
-          } else {
-             System.out.println("ディレクトリの作成に失敗しました");
-          }
-
-
-    		}catch(Exception e){
-    		 e.printStackTrace();
-    		}
-
-
-        //ファイルの新規作成
-
-        try{
-              System.out.println("ファイルを新規作成します");
-              System.out.println("新しく作るファイル名絶対パス名で入力してください");
-              System.out.println("例  　c:\\～～～\\～～～");
-
-              String new_file_name = null;
-
-
-               InputStreamReader isr=new InputStreamReader(System.in);
-               BufferedReader  br=new  BufferedReader(isr);
-               new_file_name=br.readLine();
-
-              File new_file = new File(new_file_name);
-
-
-                if (new_file.createNewFile()) {
-                   System.out.println("ファイルの作成に成功しました");
-                } else {
-                   System.out.println("ファイルの作成に失敗しました");
-                }
-
-
-              }catch(Exception e){
-               e.printStackTrace();
-              }
-
-
-
-
-
-
-     }
-}catch(Exception e){
-  e.printStackTrace();
-}
-
-
-
-  //コンソール入出力処理
-
-  int end = 0;
+		int end = 0;
 		while (end == 0) {
 
-			System.out.println("\n\n--メニュー--\n\n 1:読み込み\n 2:書き込み\n3:終了\nを入力してください");
-
-		try{
+			System.out.println("\n\n--メニュー--\n\n00:ディレクトリ・ファイルのリストを表示\n1:読み込み \n2:書き込み \n 88:新規作成\n 99:終了\nを入力してください");
 			BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 			String str = br.readLine();
-			int nu = 0;
+			int num = 0;
 
 			if (str.matches("^[0-9]+$")) {
-				nu = Integer.parseInt(str);
+				num = Integer.parseInt(str);
 			} else {
 				System.out.println("\n----------\n半角数値でメニューを選択してください。\n----------\n");
 			}
 
-			if (nu == 3) {
+			// 99: 終了
+			if (num == 99) {
 				System.out.println("終了");
 				break;
 			}
-			if (nu == 1) {
+
+			if (num == 00) {
+
+				// 00: ディレクトリ・ファイルのリストを表示
+
+				System.out.println("cドライブの中の一覧を表示します");
+				System.out.println("                            ");
+
+				File cdirectory = new File("c:\\");
+
+				File filelist[] = cdirectory.listFiles();
+				for (int i = 0; i < filelist.length; i++) {
+
+					if (filelist[i].isFile()) {
+						System.out.println("[F]" + filelist[i].getName());
+
+					} else if (filelist[i].isDirectory()) {
+						System.out.println("[D]" + filelist[i].getName());
+
+					} else {
+						System.out.println("[?]" + filelist[i].getName());
+
+					}
+				}
+
+			}
+
+			// 88: 新規作成
+			if (num == 88) {
+
+				// ディレクトリの新規作成
+				try {
+					System.out.println("ディレクトリを新規作成します");
+					System.out.println("新しく作るディレクトリ名を入力してください");
+					System.out.println("例  c:\\～～～");
+
+					String new_directory_name = null;
+
+					InputStreamReader isr = new InputStreamReader(System.in);
+					BufferedReader br_new_dir = new BufferedReader(isr);
+					new_directory_name = br_new_dir.readLine();
+
+					File new_directory = new File(new_directory_name);
+
+					if (new_directory.mkdirs()) {
+						System.out.println("ディレクトリの作成に成功しました");
+					} else {
+						System.out.println("ディレクトリの作成に失敗しました");
+					}
+
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+
+				// ファイルの新規作成
+
+				try {
+					System.out.println("ファイルを新規作成します");
+					System.out.println("新しく作るファイル名絶対パス名で入力してください");
+					System.out.println("例  　c:\\～～～\\～～～");
+
+					String new_file_name = null;
+
+					InputStreamReader isr = new InputStreamReader(System.in);
+					BufferedReader br_new_fil = new BufferedReader(isr);
+					new_file_name = br_new_fil.readLine();
+
+					File new_file = new File(new_file_name);
+
+					if (new_file.createNewFile()) {
+						System.out.println("ファイルの作成に成功しました");
+					} else {
+						System.out.println("ファイルの作成に失敗しました");
+					}
+
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			}
+			
+
+			// 1: 読み込み
+			if (num == 1) {
 				System.out.println("ファイルを読む");
+
+				// ディレクトリの指定
+
+				System.out.println("                                         ");
+				System.out.println("読み込みするディレクトリ名を入力してください");
+				System.out.println("例　　c:\\～～～");
+				System.out.println("指定したディレクトリ内のフィル一覧を表示します");
+				System.out.println("                                   ");
+				String directory_name = null;
+				try {
+					InputStreamReader isr = new InputStreamReader(System.in);
+					BufferedReader br_dir = new BufferedReader(isr);
+					directory_name = br_dir.readLine();
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+				String path_dir = directory_name;
+				File dir = new File(path_dir);
+
+				// フルパスで取得
+				System.out.println("--ファイル一覧(フルパス)--");
+				File[] files1 = dir.listFiles();
+				for (int i = 0; i < files1.length; i++) {
+					File file = files1[i];
+					if (files1[i].isFile()) {
+						// ファイル名表示
+						System.out.println(file);
+					} else if (files1[i].isDirectory()) {
+						// ディレクトリ名表示(※１)
+						System.out.println(file);
+					}
+				}
+
+				// ファイルの絶対パスを取得
+
+				System.out.println("読み込みをするファイル名を絶対パス名で入力してください");
+				System.out.println("例　　c:\\～～～\\～～～");
+				String file_name = null;
+				try {
+					InputStreamReader isr = new InputStreamReader(System.in);
+					BufferedReader br_fil = new BufferedReader(isr);
+					file_name = br_fil.readLine();
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+				File file = new File(file_name); // fileオブジェクトの作成
+				String path = file.getAbsolutePath();
+
+				System.out.println("File :" + path);
+
+				// 絶対パスで指定されたファイルの確認
+				try {
+
+					if (file.exists()) {
+						System.out.println("ファイルは既に存在します");
+
+					} else {
+						System.out.println("ファイルは存在しません");
+
+					}
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+
 				try {
 					FileReader filereader = new FileReader(file.getAbsolutePath());
 
@@ -205,7 +195,73 @@ public class KisoKadai3{
 					System.out.println(e);
 				}
 			}
-			if (nu == 2) {
+
+			// 2: 書き込み
+			if (num == 2) {
+
+				// ディレクトリの指定
+
+				System.out.println("                                         ");
+				System.out.println("書き込みをするディレクトリ名を入力してください");
+				System.out.println("例　　c:\\～～～");
+				System.out.println("指定したディレクトリ内のフィル一覧を表示します。");
+				System.out.println("                                   ");
+				String directory_name = null;
+				try {
+					InputStreamReader isr = new InputStreamReader(System.in);
+					BufferedReader br_dir = new BufferedReader(isr);
+					directory_name = br_dir.readLine();
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+				String path_dir = directory_name;
+				File dir = new File(path_dir);
+
+				// フルパスで取得
+				System.out.println("--ファイル一覧(フルパス)--");
+				File[] files1 = dir.listFiles();
+				for (int i = 0; i < files1.length; i++) {
+					File file = files1[i];
+					if (files1[i].isFile()) {
+						// ファイル名表示
+						System.out.println(file);
+					} else if (files1[i].isDirectory()) {
+						// ディレクトリ名表示(※１)
+						System.out.println(file);
+					}
+				}
+
+				// ファイルの絶対パスを取得
+
+				System.out.println("書き込みをするファイル名を絶対パス名で入力してください");
+				System.out.println("例　　c:\\～～～\\～～～");
+				String file_name = null;
+				try {
+					InputStreamReader isr = new InputStreamReader(System.in);
+					BufferedReader br_fil = new BufferedReader(isr);
+					file_name = br_fil.readLine();
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+				File file = new File(file_name); // fileオブジェクトの作成
+				String path = file.getAbsolutePath();
+
+				System.out.println("File :" + path);
+
+				// 絶対パスで指定されたファイルの確認
+				try {
+
+					if (file.exists()) {
+						System.out.println("ファイルは既に存在します");
+
+					} else {
+						System.out.println("ファイルは存在しません");
+
+					}
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+
 				System.out.println("ファイルを書く");
 				try {
 					boolean mode = false;
@@ -243,17 +299,7 @@ public class KisoKadai3{
 				}
 
 			}
-		}catch(Exception e){
-		     e.printStackTrace();
-	    }
+		}
 		System.out.println("--処理終了--");
-
-
-
-
-
-
-	 }
-
-  }
+	}
 }
