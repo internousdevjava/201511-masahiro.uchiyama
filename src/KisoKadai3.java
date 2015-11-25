@@ -122,8 +122,6 @@ public class KisoKadai3 {
 				System.out.println("                                         ");
 				System.out.println("読み込みするディレクトリ名を入力してください");
 				System.out.println("例　　c:\\～～～");
-				System.out.println("指定したディレクトリ内のフィル一覧を表示します");
-				System.out.println("                                   ");
 				String directory_name = null;
 				try {
 					InputStreamReader isr = new InputStreamReader(System.in);
@@ -132,9 +130,23 @@ public class KisoKadai3 {
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
+				
+			try{
+	
+				
 				String path_dir = directory_name;
 				File dir = new File(path_dir);
 
+				if (dir.exists()) {
+					if (dir.isFile()) {
+						System.out.println("フォルダを選択してください");
+						continue;
+					}else{
+						}
+					}
+				
+				
+				
 				// フルパスで取得
 				System.out.println("--ファイル一覧(フルパス)--");
 				File[] files1 = dir.listFiles();
@@ -149,6 +161,12 @@ public class KisoKadai3 {
 					}
 				}
 
+			}catch(Exception e){
+			   e.printStackTrace();
+			
+			}
+				
+				
 				// ファイルの絶対パスを取得
 
 				System.out.println("読み込みをするファイル名を絶対パス名で入力してください");
@@ -170,7 +188,7 @@ public class KisoKadai3 {
 				try {
 
 					if (file.exists()) {
-						System.out.println("ファイルは既に存在します");
+						System.out.println("                    ");
 
 					} else {
 						System.out.println("ファイルは存在しません");
@@ -204,8 +222,6 @@ public class KisoKadai3 {
 				System.out.println("                                         ");
 				System.out.println("書き込みをするディレクトリ名を入力してください");
 				System.out.println("例　　c:\\～～～");
-				System.out.println("指定したディレクトリ内のフィル一覧を表示します。");
-				System.out.println("                                   ");
 				String directory_name = null;
 				try {
 					InputStreamReader isr = new InputStreamReader(System.in);
@@ -214,9 +230,23 @@ public class KisoKadai3 {
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
+				
+				try{
 				String path_dir = directory_name;
 				File dir = new File(path_dir);
 
+				if (dir.exists()) {
+					if (dir.isFile()) {
+						System.out.println("フォルダを選択してください");
+						continue;
+					}else{
+						}
+					}
+				
+				
+				
+				
+				
 				// フルパスで取得
 				System.out.println("--ファイル一覧(フルパス)--");
 				File[] files1 = dir.listFiles();
@@ -230,7 +260,14 @@ public class KisoKadai3 {
 						System.out.println(file);
 					}
 				}
-
+				}catch(Exception e){
+				
+				  
+				
+				}
+					
+					
+					
 				// ファイルの絶対パスを取得
 
 				System.out.println("書き込みをするファイル名を絶対パス名で入力してください");
@@ -252,7 +289,7 @@ public class KisoKadai3 {
 				try {
 
 					if (file.exists()) {
-						System.out.println("ファイルは既に存在します");
+						System.out.println("                       ");
 
 					} else {
 						System.out.println("ファイルは存在しません");
@@ -303,3 +340,4 @@ public class KisoKadai3 {
 		System.out.println("--処理終了--");
 	}
 }
+
